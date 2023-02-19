@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import ArchivedGoals from './components/ArchivedGoals/ArchivedGoals';
+import GoalsList from './components/GoalsList/GoalsList';
+import UserInput from './components/UserInputs/UserInput';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <section id="input">
+        <UserInput />
+      </section>
+      <section id="goals">
+        <GoalsList />
+      </section>
+      <section id="archive">
+        <ArchivedGoals />
+      </section>
     </div>
   );
 }
