@@ -1,0 +1,20 @@
+.goal-items {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0.8rem;
+    background-color: blue;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 42, 255, 0.526);
+}
+
+.goal-items__title {
+    padding: 0.5rem 0.5rem;
+    color: white;
+}
+
+.goal-items__time {
+    padding: 0.5rem 0.5rem;
+    background-color: yellow;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(255, 238, 0, 0.5);
+}
