@@ -1,0 +1,44 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 10px;
+}
+
+
+.form-input label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-input input {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 18rem;
+    max-width: 100%;
+}
+
+@media (min-width: 620px) {
+    .form-input input {
+        width: 31rem;
+    }
+}
+
+.button {
+    font: inherit;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: yellow;
+}
