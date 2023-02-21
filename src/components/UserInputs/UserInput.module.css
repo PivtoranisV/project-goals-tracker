@@ -33,12 +33,3 @@
         width: 32rem;
     }
 }
-
-.button {
-    font: inherit;
-    cursor: pointer;
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    background-color: yellow;
-}

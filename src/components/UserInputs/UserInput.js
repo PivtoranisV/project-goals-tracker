@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../UI/Button';
 import Card from '../UI/Card';
 import styles from './UserInput.module.css';
 
@@ -16,9 +17,7 @@ const UserInput = () => {
             <input id="deadline" type="datetime-local" />
           </div>
         </div>
-        <button className={styles.button} type="submit">
-          Add Goal
-        </button>
+        <Button type="submit">Add Goal</Button>
       </form>
     </Card>
   );
