@@ -1,7 +1,8 @@
 import React from 'react';
+import Card from '../UI/Card';
 
 const ArchivedGoals = () => {
-  return <div>ArchivedGoals</div>;
+  return <Card>ArchivedGoals</Card>;
 };
 
 export default ArchivedGoals;

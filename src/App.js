@@ -19,15 +19,9 @@ const DUMMY_GOALS = [
 function App() {
   return (
     <div>
-      <section id={styles.input}>
-        <UserInput />
-      </section>
-      <section id={styles.goals}>
-        <GoalsList goals={DUMMY_GOALS} />
-      </section>
-      <section id={styles.archive}>
-        <ArchivedGoals />
-      </section>
+      <UserInput />
+      <GoalsList goals={DUMMY_GOALS} />
+      <ArchivedGoals />
     </div>
   );
 }
