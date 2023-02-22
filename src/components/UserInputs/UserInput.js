@@ -4,6 +4,7 @@ import Card from '../UI/Card';
 import styles from './UserInput.module.css';
 
 const UserInput = (props) => {
+  const [openInput, setOpenInput] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredTime, setEnteredTime] = useState('');
 
@@ -19,34 +20,54 @@ const UserInput = (props) => {
     props.onAddGoal(enteredTitle, enteredTime);
     setEnteredTitle('');
     setEnteredTime('');
+    setOpenInput(false);
+  };
+
+  const clickHandler = () => {
+    setOpenInput(true);
   };
 
   return (
-    <Card>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles['form-inputs']}>
-          <div className={styles['form-input']}>
-            <label htmlFor="title">Goal</label>
-            <input
-              id="title"
-              type="text"
-              value={enteredTitle}
-              onChange={titleHandler}
-            />
+    <div>
+      {!openInput && (
+        <Card>
+          <div className={styles.starter}>
+            <h2>
+              Start building your foundation today by setting a small goals and
+              taking the first step towards something great!
+            </h2>
+            <Button onClick={clickHandler}>Enter goal</Button>
           </div>
-          <div className={styles['form-input']}>
-            <label htmlFor="deadline">Deadline</label>
-            <input
-              id="deadline"
-              type="datetime-local"
-              value={enteredTime}
-              onChange={timeHandler}
-            />
-          </div>
-        </div>
-        <Button type="submit">Add Goal</Button>
-      </form>
-    </Card>
+        </Card>
+      )}
+      {openInput && (
+        <Card>
+          <form className={styles.form} onSubmit={submitHandler}>
+            <div className={styles['form-inputs']}>
+              <div className={styles['form-input']}>
+                <label htmlFor="title">Goal</label>
+                <input
+                  id="title"
+                  type="text"
+                  value={enteredTitle}
+                  onChange={titleHandler}
+                />
+              </div>
+              <div className={styles['form-input']}>
+                <label htmlFor="deadline">Deadline</label>
+                <input
+                  id="deadline"
+                  type="datetime-local"
+                  value={enteredTime}
+                  onChange={timeHandler}
+                />
+              </div>
+            </div>
+            <Button type="submit">Add Goal</Button>
+          </form>
+        </Card>
+      )}
+    </div>
   );
 };
 
