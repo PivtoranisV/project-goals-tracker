@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
+
 import ArchivedGoals from './components/ArchivedGoals/ArchivedGoals';
 import GoalsList from './components/GoalsList/GoalsList';
 import UserInput from './components/UserInputs/UserInput';
-import styles from './App.module.css';
 
 const DUMMY_GOALS = [
   {
@@ -17,10 +18,25 @@ const DUMMY_GOALS = [
 ];
 
 function App() {
+  const [enteredInfo, setEnteredInfo] = useState(DUMMY_GOALS);
+
+  const addGoalHandler = (goal, time) => {
+    setEnteredInfo((prevInfo) => {
+      return [
+        ...prevInfo,
+        {
+          id: Math.random().toString(),
+          title: goal,
+          time: new Date(time).getTime(),
+        },
+      ];
+    });
+  };
+
   return (
     <div>
-      <UserInput />
-      <GoalsList goals={DUMMY_GOALS} />
+      <UserInput onAddGoal={addGoalHandler} />
+      <GoalsList goals={enteredInfo} />
       <ArchivedGoals />
     </div>
   );
