@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import ArchivedGoals from './components/ArchivedGoals/ArchivedGoals';
 import GoalsList from './components/GoalsList/GoalsList';
+import Card from './components/UI/Card';
 import UserInput from './components/UserInputs/UserInput';
+import styles from './App.module.css';
 
 const DUMMY_GOALS = [
   {
@@ -42,7 +44,18 @@ function App() {
   return (
     <div>
       <UserInput onAddGoal={addGoalHandler} />
-      <GoalsList goals={enteredInfo} onCompleteGoal={competeGoalHandler} />
+      {enteredInfo.length !== 0 ? (
+        <GoalsList goals={enteredInfo} onCompleteGoal={competeGoalHandler} />
+      ) : (
+        <Card>
+          <div className={styles.starter}>
+            <p>
+              Every big achievement started with a small goal, but you do not
+              have one, <strong>please add!</strong>
+            </p>
+          </div>
+        </Card>
+      )}
       <ArchivedGoals />
     </div>
   );
