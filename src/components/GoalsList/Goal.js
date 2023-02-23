@@ -3,8 +3,12 @@ import Countdown from './Countdown';
 import styles from './Goal.module.css';
 
 const Goal = (props) => {
+  const deleteHandler = () => {
+    props.onClickGoal(props.title, props.id);
+  };
+
   return (
-    <li className={styles['goal-items']}>
+    <li className={styles['goal-items']} onClick={deleteHandler}>
       <span className={styles['goal-items__title']}>{props.title}</span>
       <span className={styles['goal-items__time']}>
         <Countdown deadline={props.time} />

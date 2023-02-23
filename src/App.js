@@ -33,10 +33,16 @@ function App() {
     });
   };
 
+  const competeGoalHandler = (goal) => {
+    setEnteredInfo((prevInfo) => {
+      return prevInfo.filter((el) => el.id !== goal.completedId);
+    });
+  };
+
   return (
     <div>
       <UserInput onAddGoal={addGoalHandler} />
-      <GoalsList goals={enteredInfo} />
+      <GoalsList goals={enteredInfo} onCompleteGoal={competeGoalHandler} />
       <ArchivedGoals />
     </div>
   );

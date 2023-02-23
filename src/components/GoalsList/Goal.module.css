@@ -6,6 +6,7 @@
     background-color: blue;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 42, 255, 0.526);
+    cursor: pointer;
 }
 
 .goal-items__title {
