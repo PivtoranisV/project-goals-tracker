@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import ArchivedGoals from './components/ArchivedGoals/ArchivedGoals';
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
 import UserInput from './components/UserInputs/UserInput';
 import styles from './App.module.css';
+import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
 
 const DUMMY_GOALS = [
   {
@@ -21,6 +21,7 @@ const DUMMY_GOALS = [
 
 function App() {
   const [enteredInfo, setEnteredInfo] = useState(DUMMY_GOALS);
+  const [achievedGoals, setAchievedGoals] = useState([]);
 
   const addGoalHandler = (goal, time) => {
     setEnteredInfo((prevInfo) => {
@@ -36,6 +37,12 @@ function App() {
   };
 
   const competeGoalHandler = (goal) => {
+    setAchievedGoals((prevAchievedGoals) => {
+      return [
+        ...prevAchievedGoals,
+        { title: goal.competedGoal, id: goal.completedId },
+      ];
+    });
     setEnteredInfo((prevInfo) => {
       return prevInfo.filter((el) => el.id !== goal.completedId);
     });
@@ -56,7 +63,7 @@ function App() {
           </div>
         </Card>
       )}
-      <ArchivedGoals />
+      <AchievedGoalsList achievedGoals={achievedGoals} />
     </div>
   );
 }
