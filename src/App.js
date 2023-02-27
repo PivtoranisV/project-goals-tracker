@@ -5,6 +5,7 @@ import Card from './components/UI/Card';
 import UserInput from './components/UserInputs/UserInput';
 import styles from './App.module.css';
 import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
+import FailedGoalsList from './components/ArchivedGoals/FailedGoalsList';
 
 const DUMMY_GOALS = [
   {
@@ -64,6 +65,7 @@ function App() {
         </Card>
       )}
       <AchievedGoalsList achievedGoals={achievedGoals} />
+      <FailedGoalsList />
     </div>
   );
 }

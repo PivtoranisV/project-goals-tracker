@@ -1,0 +1,13 @@
+.starter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.starter h2 {
+    color: green;
+    text-align: justify;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+}

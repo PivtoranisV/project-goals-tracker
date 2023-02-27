@@ -4,7 +4,7 @@ import Card from '../UI/Card';
 import styles from './UserInput.module.css';
 
 const UserInput = (props) => {
-  const [openInput, setOpenInput] = useState(false);
+  const [showInput, setShowInput] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredTime, setEnteredTime] = useState('');
 
@@ -20,27 +20,27 @@ const UserInput = (props) => {
     props.onAddGoal(enteredTitle, enteredTime);
     setEnteredTitle('');
     setEnteredTime('');
-    setOpenInput(false);
+    setShowInput(false);
   };
 
   const clickHandler = () => {
-    setOpenInput(true);
+    setShowInput(true);
   };
 
   return (
     <div>
-      {!openInput && (
+      {!showInput && (
         <Card>
           <div className={styles.starter}>
             <h2>
               Start building your foundation today by setting a small goals and
               taking the first step towards something great!
             </h2>
-            <Button onClick={clickHandler}>Enter goal</Button>
+            <Button onClick={clickHandler}>Enter Goal</Button>
           </div>
         </Card>
       )}
-      {openInput && (
+      {showInput && (
         <Card>
           <form className={styles.form} onSubmit={submitHandler}>
             <div className={styles['form-inputs']}>
