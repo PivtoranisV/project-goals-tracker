@@ -15,10 +15,10 @@ const FailedGoalsList = () => {
       {!showFailedGoals && (
         <Card>
           <div className={styles.starter}>
-            <h2>
+            <h3>
               Just keep trying, don't give up and you will achieve your goal!
               Try Again!
-            </h2>
+            </h3>
             <Button onClick={clickHandler}>Failed Goals</Button>
           </div>
         </Card>

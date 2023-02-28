@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
+import Modal from '../UI/Modal';
 import styles from './UserInput.module.css';
 
 const UserInput = (props) => {
   const [showInput, setShowInput] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredTime, setEnteredTime] = useState('');
+  const [error, setError] = useState();
 
   const titleHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -18,13 +20,19 @@ const UserInput = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (enteredTitle.trim().length === 0 || enteredTime.trim().length === 0) {
-      console.log('empty value');
+      setError({
+        title: 'Invalid Input',
+        message: 'Please, enter your Goal and Deadline',
+      });
       return;
     }
     const currentTime = new Date().getTime();
     const inputTime = new Date(enteredTime).getTime();
     if (inputTime < currentTime) {
-      console.log('Please enter a future date');
+      setError({
+        title: 'Invalid Deadline',
+        message: 'Please, enter future date',
+      });
       return;
     }
     props.onAddGoal(enteredTitle, enteredTime);
@@ -37,15 +45,26 @@ const UserInput = (props) => {
     setShowInput(true);
   };
 
+  const handleConfirm = () => {
+    setError();
+  };
+
   return (
     <div>
+      {error && (
+        <Modal
+          title={error.title}
+          message={error.message}
+          onConfirm={handleConfirm}
+        />
+      )}
       {!showInput && (
         <Card>
           <div className={styles.starter}>
-            <h2>
+            <h3>
               Start building your foundation today by setting a small goals and
               taking the first step towards something great!
-            </h2>
+            </h3>
             <Button onClick={clickHandler}>Enter Goal</Button>
           </div>
         </Card>

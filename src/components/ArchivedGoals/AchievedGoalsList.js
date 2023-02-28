@@ -20,10 +20,10 @@ const AchievedGoalsList = (props) => {
       {!showAchievedGoals && (
         <Card>
           <div className={styles.starter}>
-            <h2>
+            <h3>
               Check out your successes so far! It is very motivating to see how
               close you are to your Dream!
-            </h2>
+            </h3>
             <Button onClick={clickHandler}>Achieved Goals</Button>
           </div>
         </Card>

@@ -61,10 +61,10 @@ function App() {
       ) : (
         <Card>
           <div className={styles.starter}>
-            <p>
+            <h3>
               Every big achievement started with a small goal, but you do not
               have one, <strong>please add!</strong>
-            </p>
+            </h3>
           </div>
         </Card>
       )}
