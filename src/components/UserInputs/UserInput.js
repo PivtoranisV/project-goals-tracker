@@ -17,6 +17,16 @@ const UserInput = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    if (enteredTitle.trim().length === 0 || enteredTime.trim().length === 0) {
+      console.log('empty value');
+      return;
+    }
+    const currentTime = new Date().getTime();
+    const inputTime = new Date(enteredTime).getTime();
+    if (inputTime < currentTime) {
+      console.log('Please enter a future date');
+      return;
+    }
     props.onAddGoal(enteredTitle, enteredTime);
     setEnteredTitle('');
     setEnteredTime('');
