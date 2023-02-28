@@ -27,7 +27,11 @@ const AchievedGoalsList = (props) => {
       {showAchievedGoals && (
         <Card>
           {props.achievedGoals.map((achievedGoal) => (
-            <AchievedGoal title={achievedGoal.title} key={achievedGoal.id} />
+            <AchievedGoal
+              title={achievedGoal.title}
+              key={achievedGoal.id}
+              date={achievedGoal.date}
+            />
           ))}
         </Card>
       )}

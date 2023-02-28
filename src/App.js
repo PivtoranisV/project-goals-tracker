@@ -41,7 +41,11 @@ function App() {
     setAchievedGoals((prevAchievedGoals) => {
       return [
         ...prevAchievedGoals,
-        { title: goal.competedGoal, id: goal.completedId },
+        {
+          title: goal.competedGoal,
+          id: goal.completedId,
+          date: new Date().toDateString(),
+        },
       ];
     });
     setEnteredInfo((prevInfo) => {
