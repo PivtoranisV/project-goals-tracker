@@ -11,6 +11,10 @@ const AchievedGoalsList = (props) => {
     setShowAchievedGoals(true);
   };
 
+  const handleOk = () => {
+    setShowAchievedGoals(false);
+  };
+
   return (
     <>
       {!showAchievedGoals && (
@@ -26,13 +30,18 @@ const AchievedGoalsList = (props) => {
       )}
       {showAchievedGoals && (
         <Card>
-          {props.achievedGoals.map((achievedGoal) => (
-            <AchievedGoal
-              title={achievedGoal.title}
-              key={achievedGoal.id}
-              date={achievedGoal.date}
-            />
-          ))}
+          <ul className={styles['achieved-goal-list']}>
+            {props.achievedGoals.map((achievedGoal) => (
+              <AchievedGoal
+                title={achievedGoal.title}
+                key={achievedGoal.id}
+                date={achievedGoal.date}
+              />
+            ))}
+          </ul>
+          <div className={styles.ok}>
+            <Button onClick={handleOk}>Ok</Button>
+          </div>
         </Card>
       )}
     </>
