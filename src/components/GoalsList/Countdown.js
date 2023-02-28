@@ -9,14 +9,13 @@ const Countdown = (props) => {
     (remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
   );
   const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
   return (
     <>
       <span>
-        {days}d {hours}h
+        <strong>{days}</strong> days <strong>{hours}</strong> hours
       </span>
       <span>
-        {minutes}m {seconds}s
+        <strong>{minutes}</strong> minutes
       </span>
     </>
   );

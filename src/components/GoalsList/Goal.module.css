@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 0.8rem;
+    padding: 0.5rem 0.5rem;
     background-color: blue;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 42, 255, 0.526);
@@ -17,7 +17,7 @@
 .goal-items__time {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     background-color: yellow;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(255, 238, 0, 0.5);
