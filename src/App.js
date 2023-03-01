@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
 import UserInput from './components/UserInputs/UserInput';
-import styles from './App.module.css';
 import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
 import FailedGoalsList from './components/ArchivedGoals/FailedGoalsList';
+import Login from './components/Login/Login';
+
+import styles from './App.module.css';
+import Header from './components/Header/Header';
 
 const DUMMY_GOALS = [
   {
@@ -23,6 +26,7 @@ const DUMMY_GOALS = [
 function App() {
   const [enteredInfo, setEnteredInfo] = useState(DUMMY_GOALS);
   const [achievedGoals, setAchievedGoals] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addGoalHandler = (goal, time) => {
     setEnteredInfo((prevInfo) => {
@@ -53,24 +57,31 @@ function App() {
     });
   };
 
+  if (!isLoggedIn) {
+    return <Login />;
+  }
+
   return (
-    <div>
-      <UserInput onAddGoal={addGoalHandler} />
-      {enteredInfo.length !== 0 ? (
-        <GoalsList goals={enteredInfo} onCompleteGoal={competeGoalHandler} />
-      ) : (
-        <Card>
-          <div className={styles.starter}>
-            <h3>
-              Every big achievement started with a small goal, but you do not
-              have one, <strong>please add!</strong>
-            </h3>
-          </div>
-        </Card>
-      )}
-      <AchievedGoalsList achievedGoals={achievedGoals} />
-      <FailedGoalsList />
-    </div>
+    <React.Fragment>
+      <Header />
+      <main>
+        <UserInput onAddGoal={addGoalHandler} />
+        {enteredInfo.length !== 0 ? (
+          <GoalsList goals={enteredInfo} onCompleteGoal={competeGoalHandler} />
+        ) : (
+          <Card>
+            <div className={styles.starter}>
+              <h3>
+                Every big achievement started with a small goal, but you do not
+                have one, <strong>please add!</strong>
+              </h3>
+            </div>
+          </Card>
+        )}
+        <AchievedGoalsList achievedGoals={achievedGoals} />
+        <FailedGoalsList />
+      </main>
+    </React.Fragment>
   );
 }
 

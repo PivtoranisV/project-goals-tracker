@@ -1,0 +1,11 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: blue;
+    padding: 0 0.5rem;
+}
+
+.header h1 {
+    color: white;
+}
