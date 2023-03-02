@@ -2,19 +2,25 @@ import React from 'react';
 import Button from '../UI/Button';
 import styles from './Navigation.module.css';
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <nav className={styles.nav}>
       <ul>
-        <li>
-          <a href="/">Achieved Goals</a>
-        </li>
-        <li>
-          <a href="/">Failed Goals</a>
-        </li>
-        <li>
-          <Button>Logout</Button>
-        </li>
+        {props.loginStatus && (
+          <li>
+            <a href="/">Achieved Goals</a>
+          </li>
+        )}
+        {props.loginStatus && (
+          <li>
+            <a href="/">Failed Goals</a>
+          </li>
+        )}
+        {props.loginStatus && (
+          <li>
+            <Button onClick={props.onLogout}>Logout</Button>
+          </li>
+        )}
       </ul>
     </nav>
   );

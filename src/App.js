@@ -57,13 +57,21 @@ function App() {
     });
   };
 
+  const loginHandler = (email, password) => {
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
+
   if (!isLoggedIn) {
-    return <Login />;
+    return <Login onLogin={loginHandler} />;
   }
 
   return (
     <React.Fragment>
-      <Header />
+      <Header loginStatus={isLoggedIn} onLogout={logoutHandler} />
       <main>
         <UserInput onAddGoal={addGoalHandler} />
         {enteredInfo.length !== 0 ? (
