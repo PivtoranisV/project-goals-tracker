@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
@@ -11,17 +11,14 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState();
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
-  };
+  useEffect(() => {
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length >= 7
+    );
+  }, [enteredEmail, enteredPassword]);
 
   const emailHandler = (event) => {
     setEnteredEmail(event.target.value);
-
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length >= 7
-    );
   };
 
   const emailValidation = () => {
@@ -30,14 +27,15 @@ const Login = (props) => {
 
   const passwordHandler = (event) => {
     setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length >= 7 && enteredEmail.includes('@')
-    );
   };
 
   const passwordValidation = () => {
     setPasswordIsValid(enteredPassword.length >= 7);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    props.onLogin(enteredEmail, enteredPassword);
   };
 
   return (
