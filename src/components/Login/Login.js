@@ -6,7 +6,10 @@ import styles from './Login.module.css';
 
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState('');
+  const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
+  const [passwordIsValid, setPasswordIsValid] = useState();
+  const [formIsValid, setFormIsValid] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -15,10 +18,26 @@ const Login = (props) => {
 
   const emailHandler = (event) => {
     setEnteredEmail(event.target.value);
+
+    setFormIsValid(
+      event.target.value.includes('@') && enteredPassword.trim().length >= 7
+    );
+  };
+
+  const emailValidation = () => {
+    setEmailIsValid(enteredEmail.includes('@'));
   };
 
   const passwordHandler = (event) => {
     setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      event.target.value.trim().length >= 7 && enteredEmail.includes('@')
+    );
+  };
+
+  const passwordValidation = () => {
+    setPasswordIsValid(enteredPassword.length >= 7);
   };
 
   return (
@@ -26,7 +45,11 @@ const Login = (props) => {
       <Header />
       <Card>
         <form onSubmit={submitHandler}>
-          <div className={styles.control}>
+          <div
+            className={`${styles.control} ${
+              emailIsValid === false ? styles.invalid : ''
+            }`}
+          >
             <label htmlFor="email">E-Mail</label>
             <input
               type="email"
@@ -34,9 +57,14 @@ const Login = (props) => {
               name="email"
               value={enteredEmail}
               onChange={emailHandler}
+              onBlur={emailValidation}
             />
           </div>
-          <div className={styles.control}>
+          <div
+            className={`${styles.control} ${
+              passwordIsValid === false ? styles.invalid : ''
+            }`}
+          >
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -44,10 +72,17 @@ const Login = (props) => {
               name="password"
               value={enteredPassword}
               onChange={passwordHandler}
+              onBlur={passwordValidation}
             />
           </div>
           <div className={styles.actions}>
-            <Button>Log In</Button>
+            <Button
+              type="submit"
+              disabled={!formIsValid}
+              className={styles.btn}
+            >
+              Log In
+            </Button>
           </div>
         </form>
       </Card>
