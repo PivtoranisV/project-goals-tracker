@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './FailedGoal.module.css';
 
 const FailedGoal = (props) => {
-  return <li>{props.title}</li>;
+  return <li className={styles['goal-items']}>{props.title}</li>;
 };
 
 export default FailedGoal;
