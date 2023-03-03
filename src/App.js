@@ -26,6 +26,7 @@ const DUMMY_GOALS = [
 function App() {
   const [enteredInfo, setEnteredInfo] = useState(DUMMY_GOALS);
   const [achievedGoals, setAchievedGoals] = useState([]);
+  const [failedGoals, setFailedGoals] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -62,6 +63,20 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const failed = enteredInfo.filter((goal) => goal.time <= now);
+
+      setEnteredInfo((prevGoals) => {
+        return prevGoals.filter((goal) => goal.time > now);
+      });
+
+      setFailedGoals((prevFailedGoals) => [...prevFailedGoals, ...failed]);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [enteredInfo]);
+
   const loginHandler = (email, password) => {
     localStorage.setItem('loggedIn', 'Yes');
     setIsLoggedIn(true);
@@ -94,7 +109,7 @@ function App() {
           </Card>
         )}
         <AchievedGoalsList achievedGoals={achievedGoals} />
-        <FailedGoalsList />
+        <FailedGoalsList failedGoals={failedGoals} />
       </main>
     </React.Fragment>
   );
