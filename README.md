@@ -1,4 +1,4 @@
-# Goal Tracker App
+# Goals Tracker App
 
 **This project was inspired by my own personal goal tracking needs**
 The application is designed to help users track their progress towards their goals and provide motivation to achieve them within the given deadline.
