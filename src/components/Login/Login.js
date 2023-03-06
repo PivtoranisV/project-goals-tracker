@@ -38,7 +38,6 @@ const Login = (props) => {
   });
 
   useEffect(() => {
-    console.log('validating');
     setFormIsValid(emailState.isValid && passwordState.isValid);
   }, [emailState.isValid, passwordState.isValid]);
 

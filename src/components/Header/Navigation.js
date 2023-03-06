@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import LoginContext from '../../store/login-context';
 import Button from '../UI/Button';
 import styles from './Navigation.module.css';
 
 const Navigation = (props) => {
+  const ctx = useContext(LoginContext);
+
   return (
     <nav className={styles.nav}>
       <ul>
-        {props.loginStatus && (
+        {ctx.loginStatus && (
           <li>
             <a href="/">Achieved Goals</a>
           </li>
         )}
-        {props.loginStatus && (
+        {ctx.loginStatus && (
           <li>
             <a href="/">Failed Goals</a>
           </li>
         )}
-        {props.loginStatus && (
+        {ctx.loginStatus && (
           <li>
             <Button onClick={props.onLogout}>Logout</Button>
           </li>

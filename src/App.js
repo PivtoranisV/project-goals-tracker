@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 
 import styles from './App.module.css';
 import Header from './components/Header/Header';
+import LoginContext from './store/login-context';
 
 const DUMMY_GOALS = [
   {
@@ -92,8 +93,8 @@ function App() {
   }
 
   return (
-    <React.Fragment>
-      <Header loginStatus={isLoggedIn} onLogout={logoutHandler} />
+    <LoginContext.Provider value={{ loginStatus: isLoggedIn }}>
+      <Header onLogout={logoutHandler} />
       <main>
         <UserInput onAddGoal={addGoalHandler} />
         {enteredInfo.length !== 0 ? (
@@ -111,7 +112,7 @@ function App() {
         <AchievedGoalsList achievedGoals={achievedGoals} />
         <FailedGoalsList failedGoals={failedGoals} />
       </main>
-    </React.Fragment>
+    </LoginContext.Provider>
   );
 }
 
