@@ -4,8 +4,27 @@
     align-items: center;
     background: blue;
     padding: 0 0.5rem;
+    margin-bottom: 3rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
 }
 
 .header h1 {
     color: white;
+}
+
+.main-image {
+    width: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.main-image img {
+    width: 110%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(2.5rem);
 }
