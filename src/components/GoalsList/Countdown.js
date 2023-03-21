@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Countdown.module.css';
 
 const Countdown = (props) => {
+  const [animationIsShown, setAnimationIsShown] = useState(false);
+
   const currentTime = new Date().getTime();
   const remaining = props.deadline - currentTime;
 
@@ -16,8 +18,28 @@ const Countdown = (props) => {
       ? styles['goal-items__time-low']
       : styles['goal-items__time'];
 
+  const countdownClasses = `${timeClass} ${
+    animationIsShown ? styles.wiggle : ''
+  }`;
+
+  useEffect(() => {
+    if (remaining === 0) {
+      return;
+    }
+
+    setAnimationIsShown(true);
+
+    const timer = setTimeout(() => {
+      setAnimationIsShown(false);
+    }, 10000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [remaining]);
+
   return (
-    <span className={timeClass}>
+    <span key={remaining} className={countdownClasses}>
       <span>
         <strong>{days}</strong> days <strong>{hours}</strong> hours
       </span>

@@ -15,12 +15,12 @@ const DUMMY_GOALS = [
   {
     id: 1,
     title: 'Complete 10 lectures from the course',
-    time: new Date('March 10, 2023 13:00:00').getTime(),
+    time: new Date('March 30, 2023 13:00:00').getTime(),
   },
   {
     id: 2,
     title: 'Write LinkedIn post',
-    time: new Date('March 15, 2023 15:00:00').getTime(),
+    time: new Date('March 25, 2023 15:00:00').getTime(),
   },
 ];
 
