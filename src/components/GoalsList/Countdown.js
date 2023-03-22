@@ -23,7 +23,7 @@ const Countdown = (props) => {
   }`;
 
   useEffect(() => {
-    if (remaining === 0) {
+    if (minutes === 0) {
       return;
     }
 
@@ -31,15 +31,15 @@ const Countdown = (props) => {
 
     const timer = setTimeout(() => {
       setAnimationIsShown(false);
-    }, 10000);
+    }, 1200);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [remaining]);
+  }, [minutes]);
 
   return (
-    <span key={remaining} className={countdownClasses}>
+    <span key={minutes} className={countdownClasses}>
       <span>
         <strong>{days}</strong> days <strong>{hours}</strong> hours
       </span>
