@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
@@ -6,10 +6,9 @@ import UserInput from './components/UserInputs/UserInput';
 import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
 import FailedGoalsList from './components/ArchivedGoals/FailedGoalsList';
 import Login from './components/Login/Login';
-
-import styles from './App.module.css';
 import Header from './components/Header/Header';
 import LoginContext from './store/login-context';
+import styles from './App.module.css';
 
 const DUMMY_GOALS = [
   {
@@ -24,16 +23,12 @@ const DUMMY_GOALS = [
   },
 ];
 
-function App() {
+const App = () => {
   const [enteredInfo, setEnteredInfo] = useState(DUMMY_GOALS);
   const [achievedGoals, setAchievedGoals] = useState([]);
   const [failedGoals, setFailedGoals] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const loginFromStorage = localStorage.getItem('loggedIn');
-    setIsLoggedIn(loginFromStorage === 'Yes' ? true : false);
-  }, []);
+  const ctx = useContext(LoginContext);
 
   const addGoalHandler = (goal, time) => {
     setEnteredInfo((prevInfo) => {
@@ -78,23 +73,13 @@ function App() {
     return () => clearInterval(interval);
   }, [enteredInfo]);
 
-  const loginHandler = (email, password) => {
-    localStorage.setItem('loggedIn', 'Yes');
-    setIsLoggedIn(true);
-  };
-
-  const logoutHandler = () => {
-    localStorage.removeItem('loggedIn');
-    setIsLoggedIn(false);
-  };
-
-  if (!isLoggedIn) {
-    return <Login onLogin={loginHandler} />;
+  if (!ctx.loginStatus) {
+    return <Login />;
   }
 
   return (
-    <LoginContext.Provider value={{ loginStatus: isLoggedIn }}>
-      <Header onLogout={logoutHandler} />
+    <React.Fragment>
+      <Header />
       <main>
         <UserInput onAddGoal={addGoalHandler} />
         {enteredInfo.length !== 0 ? (
@@ -112,8 +97,8 @@ function App() {
         <AchievedGoalsList achievedGoals={achievedGoals} />
         <FailedGoalsList failedGoals={failedGoals} />
       </main>
-    </LoginContext.Provider>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
