@@ -15,6 +15,7 @@ const GoalsList = (props) => {
           <Goal
             title={goal.title}
             time={goal.time}
+            category={goal.category}
             key={goal.id}
             id={goal.id}
             onClickGoal={clickedGoal}

@@ -9,10 +9,15 @@ const Goal = (props) => {
 
   return (
     <li className={styles['goal-items']} onClick={deleteHandler}>
-      <span className={styles['goal-items__title']}>{props.title}</span>
-      <span>
-        <Countdown deadline={props.time} />
+      <span className={styles['goal-items__category']}>
+        {props.category} Goal
       </span>
+      <div>
+        <span className={styles['goal-items__title']}>{props.title}</span>
+        <span>
+          <Countdown deadline={props.time} />
+        </span>
+      </div>
     </li>
   );
 };

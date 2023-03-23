@@ -39,14 +39,10 @@ const Countdown = (props) => {
   }, [minutes]);
 
   return (
-    <span key={minutes} className={countdownClasses}>
-      <span>
-        <strong>{days}</strong> days <strong>{hours}</strong> hours
-      </span>
-      <span>
-        <strong>{minutes}</strong> minutes
-      </span>
-    </span>
+    <div key={minutes} className={countdownClasses}>
+      <strong> {days} </strong> days, <strong> {hours} </strong> hours and{' '}
+      <strong>{minutes}</strong> minutes
+    </div>
   );
 };
 

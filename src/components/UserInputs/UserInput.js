@@ -8,6 +8,8 @@ const UserInput = (props) => {
   const [showInput, setShowInput] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredTime, setEnteredTime] = useState('');
+  const [enteredCategory, setEnteredCategory] = useState('');
+
   const [error, setError] = useState();
 
   const titleHandler = (event) => {
@@ -17,12 +19,20 @@ const UserInput = (props) => {
     setEnteredTime(event.target.value);
   };
 
+  const categoryHandler = (event) => {
+    setEnteredCategory(event.target.value);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    if (enteredTitle.trim().length === 0 || enteredTime.trim().length === 0) {
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredTime.trim().length === 0 ||
+      enteredCategory.trim().length === 0
+    ) {
       setError({
         title: 'Invalid Input',
-        message: 'Please, enter your Goal and Deadline',
+        message: 'Please, enter your Goal, Category and Deadline',
       });
       return;
     }
@@ -35,7 +45,7 @@ const UserInput = (props) => {
       });
       return;
     }
-    props.onAddGoal(enteredTitle, enteredTime);
+    props.onAddGoal(enteredTitle, enteredCategory, enteredTime);
     setEnteredTitle('');
     setEnteredTime('');
     setShowInput(false);
@@ -81,6 +91,20 @@ const UserInput = (props) => {
                   value={enteredTitle}
                   onChange={titleHandler}
                 />
+              </div>
+              <div className={styles['form-input']}>
+                <label htmlFor="category">Category</label>
+                <select
+                  id="category"
+                  value={enteredCategory}
+                  onChange={categoryHandler}
+                >
+                  <option value="">Select a category</option>
+                  <option value="Personal">Personal</option>
+                  <option value="Work">Work</option>
+                  <option value="Education">Education</option>
+                  <option value="Health">Health</option>
+                </select>
               </div>
               <div className={styles['form-input']}>
                 <label htmlFor="deadline">Deadline</label>

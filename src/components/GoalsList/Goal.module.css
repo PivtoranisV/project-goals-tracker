@@ -1,7 +1,7 @@
 .goal-items {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     padding: 0.5rem 0.5rem;
     background-color: blue;
     border-radius: 12px;
@@ -10,7 +10,12 @@
 }
 
 .goal-items__title {
-    padding: 0.5rem 0.5rem;
+    padding: 0.8rem 0.8rem;
     font-weight: bold;
     color: white;
+}
+
+.goal-items__category {
+    margin-bottom: 1rem;
+    color: #d2d0c4
 }

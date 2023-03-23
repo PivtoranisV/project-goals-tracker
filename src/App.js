@@ -14,11 +14,13 @@ const DUMMY_GOALS = [
   {
     id: 1,
     title: 'Complete 10 lectures from the course',
+    category: 'Personal',
     time: new Date('March 30, 2023 13:00:00').getTime(),
   },
   {
     id: 2,
     title: 'Write LinkedIn post',
+    category: 'Work',
     time: new Date('March 25, 2023 15:00:00').getTime(),
   },
 ];
@@ -30,13 +32,14 @@ const App = () => {
 
   const ctx = useContext(LoginContext);
 
-  const addGoalHandler = (goal, time) => {
+  const addGoalHandler = (goal, category, time) => {
     setEnteredInfo((prevInfo) => {
       return [
         ...prevInfo,
         {
           id: Math.random().toString(),
           title: goal,
+          category: category,
           time: new Date(time).getTime(),
         },
       ];
