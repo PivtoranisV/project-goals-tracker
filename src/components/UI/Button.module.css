@@ -3,14 +3,14 @@
     cursor: pointer;
     border-radius: 12px;
     padding: 1rem;
-    border: 2px solid yellow;
-    background: #e1e157;
+    border: 2px solid #f7e702;
+    background: #f7e702;
 }
 
 .button:hover,
 .button:active {
     background: rgb(255, 255, 191);
-    border-color: blue;
+    border-color: #230052;
 }
 
 .button:focus {

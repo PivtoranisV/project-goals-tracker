@@ -1,0 +1,19 @@
+.form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.form-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 5px;
+}
+
+.form-input label {
+    font-weight: bold;
+}

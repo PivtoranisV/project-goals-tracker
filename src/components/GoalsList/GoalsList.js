@@ -1,4 +1,5 @@
 import React from 'react';
+import Filter from '../Filter/Filter';
 import Card from '../UI/Card';
 import Goal from './Goal';
 import styles from './GoalList.module.css';
@@ -10,6 +11,7 @@ const GoalsList = (props) => {
 
   return (
     <Card>
+      <Filter />
       <ul className={styles['goal-list']}>
         {props.goals.map((goal) => (
           <Goal

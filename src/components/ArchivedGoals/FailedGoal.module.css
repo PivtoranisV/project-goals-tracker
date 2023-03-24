@@ -1,16 +1,14 @@
 .goal-items {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding: 0.8rem 0.8rem;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(255, 0, 0);
+    background-color: #b70000;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(255, 0, 0, 0.526);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .goal-items__title {
-    padding: 0.5rem 0.5rem;
+    padding: 0.8rem 0.8rem;
+    font-weight: bold;
     color: white;
 }

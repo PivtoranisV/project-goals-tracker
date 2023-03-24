@@ -48,6 +48,7 @@ const UserInput = (props) => {
     props.onAddGoal(enteredTitle, enteredCategory, enteredTime);
     setEnteredTitle('');
     setEnteredTime('');
+    setEnteredCategory('');
     setShowInput(false);
   };
 
