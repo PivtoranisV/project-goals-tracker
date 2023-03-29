@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import Header from './components/Header/Header';
 import LoginContext from './store/login-context';
 import styles from './App.module.css';
+import Space from './components/Space/Space';
 
 const DUMMY_GOALS = [
   {
@@ -99,6 +100,7 @@ const App = () => {
         )}
         <AchievedGoalsList achievedGoals={achievedGoals} />
         <FailedGoalsList failedGoals={failedGoals} />
+        <Space />
       </main>
     </React.Fragment>
   );
