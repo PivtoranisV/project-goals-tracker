@@ -21,6 +21,11 @@ const Navigation = (props) => {
         )}
         {ctx.loginStatus && (
           <li>
+            <a href="/">Take a Brake</a>
+          </li>
+        )}
+        {ctx.loginStatus && (
+          <li>
             <Button onClick={ctx.logout}>Logout</Button>
           </li>
         )}
