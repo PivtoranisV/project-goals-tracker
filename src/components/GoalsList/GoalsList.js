@@ -11,6 +11,10 @@ const GoalsList = (props) => {
     props.onCompleteGoal({ competedGoal: title, completedId: id });
   };
 
+  const failedGoalHandler = (id) => {
+    props.onFailedGoal(id);
+  };
+
   const filterHandler = (filterSelection) => {
     setFilterSelection(filterSelection);
   };
@@ -35,6 +39,7 @@ const GoalsList = (props) => {
             key={goal.id}
             id={goal.id}
             onClickGoal={clickedGoal}
+            onFailedGoal={failedGoalHandler}
           />
         ))}
       </ul>

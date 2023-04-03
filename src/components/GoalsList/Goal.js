@@ -7,6 +7,10 @@ const Goal = (props) => {
     props.onClickGoal(props.title, props.id);
   };
 
+  const failedGoalHandler = (id) => {
+    props.onFailedGoal(id);
+  };
+
   return (
     <li className={styles['goal-items']} onClick={deleteHandler}>
       <span className={styles['goal-items__category']}>
@@ -15,7 +19,11 @@ const Goal = (props) => {
       <div>
         <span className={styles['goal-items__title']}>{props.title}</span>
         <span>
-          <Countdown deadline={props.time} />
+          <Countdown
+            deadline={props.time}
+            id={props.id}
+            onFailedGoal={failedGoalHandler}
+          />
         </span>
       </div>
     </li>
