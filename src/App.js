@@ -24,7 +24,6 @@ const App = () => {
   const fetchGoals = async () => {
     const response = await fetch(URL);
     const data = await response.json();
-    console.log(data);
 
     const loadedGoals = [];
     for (const key in data) {
@@ -42,18 +41,8 @@ const App = () => {
     fetchGoals();
   }, []);
 
-  const addGoalHandler = (goal, category, time, id) => {
-    setActiveGoals((prevInfo) => {
-      return [
-        ...prevInfo,
-        {
-          id: id,
-          title: goal,
-          category: category,
-          time: new Date(time).getTime(),
-        },
-      ];
-    });
+  const addGoalHandler = (goal) => {
+    setActiveGoals((prevGoals) => prevGoals.concat(goal));
   };
 
   const completeGoalHandler = (goal) => {
