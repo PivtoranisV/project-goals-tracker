@@ -63,7 +63,7 @@ const SpaceFact = () => {
               <div className={styles['form-input']}>
                 <label htmlFor="date">
                   If you missed the space fact of the day, don't worry - just
-                  select any data that took place after June 16, 1995, and press
+                  select any date that took place after June 16, 1995, and press
                   the button!
                 </label>
                 <input type="date" id="date" ref={dateRef} />

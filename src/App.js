@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
@@ -11,34 +11,43 @@ import LoginContext from './store/login-context';
 import styles from './App.module.css';
 import Space from './components/Space/Space';
 
-const DUMMY_GOALS = [
-  {
-    id: 1,
-    title: 'Complete 10 lectures from the course',
-    category: 'Personal',
-    time: new Date('April 30, 2023 13:00:00').getTime(),
-  },
-  {
-    id: 2,
-    title: 'Write LinkedIn post',
-    category: 'Work',
-    time: new Date('April 25, 2023 15:00:00').getTime(),
-  },
-];
+const URL =
+  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
 
 const App = () => {
-  const [activeGoals, setActiveGoals] = useState(DUMMY_GOALS);
+  const [activeGoals, setActiveGoals] = useState([]);
   const [achievedGoals, setAchievedGoals] = useState([]);
   const [failedGoals, setFailedGoals] = useState([]);
 
   const ctx = useContext(LoginContext);
 
-  const addGoalHandler = (goal, category, time) => {
+  const fetchGoals = async () => {
+    const response = await fetch(URL);
+    const data = await response.json();
+    console.log(data);
+
+    const loadedGoals = [];
+    for (const key in data) {
+      loadedGoals.push({
+        id: key,
+        title: data[key].title,
+        category: data[key].category,
+        time: data[key].time,
+      });
+    }
+    setActiveGoals(loadedGoals);
+  };
+
+  useEffect(() => {
+    fetchGoals();
+  }, []);
+
+  const addGoalHandler = (goal, category, time, id) => {
     setActiveGoals((prevInfo) => {
       return [
         ...prevInfo,
         {
-          id: Math.random().toString(),
+          id: id,
           title: goal,
           category: category,
           time: new Date(time).getTime(),

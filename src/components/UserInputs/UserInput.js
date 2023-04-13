@@ -4,12 +4,14 @@ import Card from '../UI/Card';
 import Modal from '../UI/Modal';
 import styles from './UserInput.module.css';
 
+const URL =
+  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
+
 const UserInput = (props) => {
   const [showInput, setShowInput] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredTime, setEnteredTime] = useState('');
   const [enteredCategory, setEnteredCategory] = useState('');
-
   const [error, setError] = useState();
 
   const titleHandler = (event) => {
@@ -23,7 +25,7 @@ const UserInput = (props) => {
     setEnteredCategory(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (
       enteredTitle.trim().length === 0 ||
@@ -45,7 +47,21 @@ const UserInput = (props) => {
       });
       return;
     }
-    props.onAddGoal(enteredTitle, enteredCategory, enteredTime);
+    const response = await fetch(URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        title: enteredTitle,
+        category: enteredCategory,
+        time: new Date(enteredTime).getTime(),
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    const generatedId = data.name;
+
+    props.onAddGoal(enteredTitle, enteredCategory, enteredTime, generatedId);
     setEnteredTitle('');
     setEnteredTime('');
     setEnteredCategory('');
