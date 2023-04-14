@@ -4,11 +4,41 @@ import Card from '../UI/Card';
 import Goal from './Goal';
 import styles from './GoalList.module.css';
 
+import useHttp from '../../hooks/use-http';
+
+const URL =
+  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
+
 const GoalsList = (props) => {
   const [filterSelection, setFilterSelection] = useState('');
 
+  const { isLoading, error, sendRequest: sendCompletedGoal } = useHttp();
+
   const clickedGoal = (title, id) => {
-    props.onCompleteGoal({ competedGoal: title, completedId: id });
+    const createCompletedGoal = () => {
+      const newCompletedGoal = {
+        id: id,
+        title: title,
+        date: new Date().toDateString(),
+      };
+      props.onCompleteGoal(newCompletedGoal);
+    };
+
+    sendCompletedGoal(
+      {
+        url: URL,
+        method: 'POST',
+        body: {
+          id: id,
+          title: title,
+          date: new Date().toDateString(),
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+      createCompletedGoal
+    );
   };
 
   const failedGoalHandler = (id) => {
@@ -38,6 +68,8 @@ const GoalsList = (props) => {
           id={goal.id}
           onClickGoal={clickedGoal}
           onFailedGoal={failedGoalHandler}
+          loading={isLoading}
+          error={error}
         />
       ))}
     </ul>

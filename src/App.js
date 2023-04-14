@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
@@ -23,6 +23,8 @@ const App = () => {
 
   const activeUrl =
     'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
+  const competedUrl =
+    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
 
   const transformActiveGoals = (goal) => {
     const loadedGoals = [];
@@ -38,30 +40,58 @@ const App = () => {
     setActiveGoals(loadedGoals);
   };
 
-  const { isLoading, error, sendRequest: fetchActiveGoals } = useHttp();
+  const transformCompletedGoals = (goal) => {
+    const loadedCompletedGoals = [];
+    for (const key in goal) {
+      loadedCompletedGoals.push({
+        id: goal[key].id,
+        title: goal[key].title,
+        date: goal[key].date,
+      });
+    }
+
+    setAchievedGoals(loadedCompletedGoals);
+  };
+
+  const {
+    isLoading: activeLoading,
+    error: activeError,
+    sendRequest: fetchActiveGoals,
+  } = useHttp();
+
+  const {
+    isLoading: completedLoading,
+    error: completedError,
+    sendRequest: fetchCompletedGoals,
+  } = useHttp();
+
+  const { sendRequest: sendDeleteRequest } = useHttp();
+
+  const deleteActiveGoal = useCallback(
+    (goalId) => {
+      sendDeleteRequest({
+        url: `https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals/${goalId}.json`,
+        method: 'DELETE',
+      });
+    },
+    [sendDeleteRequest]
+  );
 
   useEffect(() => {
     fetchActiveGoals({ url: activeUrl }, transformActiveGoals);
-  }, [fetchActiveGoals]);
+    fetchCompletedGoals({ url: competedUrl }, transformCompletedGoals);
+  }, [fetchActiveGoals, fetchCompletedGoals]);
 
   const addGoalHandler = (goal) => {
     setActiveGoals((prevGoals) => prevGoals.concat(goal));
   };
 
   const completeGoalHandler = (goal) => {
-    setAchievedGoals((prevAchievedGoals) => {
-      return [
-        ...prevAchievedGoals,
-        {
-          title: goal.competedGoal,
-          id: goal.completedId,
-          date: new Date().toDateString(),
-        },
-      ];
-    });
+    setAchievedGoals((prevAchievedGoals) => prevAchievedGoals.concat(goal));
     setActiveGoals((prevInfo) => {
-      return prevInfo.filter((el) => el.id !== goal.completedId);
+      return prevInfo.filter((el) => el.id !== goal.id);
     });
+    deleteActiveGoal(goal.id);
   };
 
   const failedGoalHandler = (id) => {
@@ -81,8 +111,8 @@ const App = () => {
         <UserInput onAddGoal={addGoalHandler} />
         {activeGoals.length !== 0 ? (
           <GoalsList
-            error={error}
-            loading={isLoading}
+            error={activeError}
+            loading={activeLoading}
             goals={activeGoals}
             onCompleteGoal={completeGoalHandler}
             onFailedGoal={failedGoalHandler}
@@ -97,7 +127,11 @@ const App = () => {
             </div>
           </Card>
         )}
-        <AchievedGoalsList achievedGoals={achievedGoals} />
+        <AchievedGoalsList
+          achievedGoals={achievedGoals}
+          loading={completedLoading}
+          error={completedError}
+        />
         <FailedGoalsList failedGoals={failedGoals} />
         <Space />
       </main>
