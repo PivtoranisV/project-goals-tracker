@@ -23,8 +23,10 @@ const App = () => {
 
   const activeUrl =
     'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
-  const competedUrl =
+  const completedUrl =
     'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
+  const failedUrl =
+    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/failedGoals.json';
 
   const transformActiveGoals = (goal) => {
     const loadedGoals = [];
@@ -53,6 +55,19 @@ const App = () => {
     setAchievedGoals(loadedCompletedGoals);
   };
 
+  const transformFailedGoals = (goal) => {
+    const loadedFailedGoals = [];
+    for (const key in goal) {
+      loadedFailedGoals.push({
+        id: goal[key].id,
+        title: goal[key].title,
+        date: goal[key].date,
+      });
+    }
+
+    setFailedGoals(loadedFailedGoals);
+  };
+
   const {
     isLoading: activeLoading,
     error: activeError,
@@ -63,6 +78,12 @@ const App = () => {
     isLoading: completedLoading,
     error: completedError,
     sendRequest: fetchCompletedGoals,
+  } = useHttp();
+
+  const {
+    isLoading: failedLoading,
+    error: failedError,
+    sendRequest: fetchFailedGoals,
   } = useHttp();
 
   const { sendRequest: sendDeleteRequest } = useHttp();
@@ -79,8 +100,9 @@ const App = () => {
 
   useEffect(() => {
     fetchActiveGoals({ url: activeUrl }, transformActiveGoals);
-    fetchCompletedGoals({ url: competedUrl }, transformCompletedGoals);
-  }, [fetchActiveGoals, fetchCompletedGoals]);
+    fetchCompletedGoals({ url: completedUrl }, transformCompletedGoals);
+    fetchFailedGoals({ url: failedUrl }, transformFailedGoals);
+  }, [fetchActiveGoals, fetchCompletedGoals, fetchFailedGoals]);
 
   const addGoalHandler = (goal) => {
     setActiveGoals((prevGoals) => prevGoals.concat(goal));
@@ -94,10 +116,12 @@ const App = () => {
     deleteActiveGoal(goal.id);
   };
 
-  const failedGoalHandler = (id) => {
-    const goalToRemove = activeGoals.find((goal) => goal.id === id);
-    setActiveGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
-    setFailedGoals((prevFailedGoals) => [...prevFailedGoals, goalToRemove]);
+  const failedGoalHandler = (goal) => {
+    setFailedGoals((prevFailedGoals) => prevFailedGoals.concat(goal));
+    setActiveGoals((prevInfo) => {
+      return prevInfo.filter((el) => el.id !== goal.id);
+    });
+    deleteActiveGoal(goal.id);
   };
 
   if (!ctx.loginStatus) {
@@ -132,7 +156,11 @@ const App = () => {
           loading={completedLoading}
           error={completedError}
         />
-        <FailedGoalsList failedGoals={failedGoals} />
+        <FailedGoalsList
+          failedGoals={failedGoals}
+          loading={failedLoading}
+          error={failedError}
+        />
         <Space />
       </main>
     </React.Fragment>

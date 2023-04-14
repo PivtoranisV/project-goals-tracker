@@ -7,8 +7,8 @@ const Goal = (props) => {
     props.onClickGoal(props.title, props.id);
   };
 
-  const failedGoalHandler = (id) => {
-    props.onFailedGoal(id);
+  const failedGoalHandler = (title, id) => {
+    props.onFailedGoal(title, id);
   };
 
   return (
@@ -20,6 +20,7 @@ const Goal = (props) => {
         <span className={styles['goal-items__title']}>{props.title}</span>
         <span>
           <Countdown
+            title={props.title}
             deadline={props.time}
             id={props.id}
             onFailedGoal={failedGoalHandler}

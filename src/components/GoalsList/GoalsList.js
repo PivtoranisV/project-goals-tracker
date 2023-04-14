@@ -6,13 +6,21 @@ import styles from './GoalList.module.css';
 
 import useHttp from '../../hooks/use-http';
 
-const URL =
+const completedUrl =
   'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
+const failedUrl =
+  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/failedGoals.json';
 
 const GoalsList = (props) => {
   const [filterSelection, setFilterSelection] = useState('');
 
-  const { isLoading, error, sendRequest: sendCompletedGoal } = useHttp();
+  const {
+    isLoading: completedLoading,
+    error: completedError,
+    sendRequest: sendCompletedGoal,
+  } = useHttp();
+
+  const { sendRequest: sendFailedGoal } = useHttp();
 
   const clickedGoal = (title, id) => {
     const createCompletedGoal = () => {
@@ -26,7 +34,7 @@ const GoalsList = (props) => {
 
     sendCompletedGoal(
       {
-        url: URL,
+        url: completedUrl,
         method: 'POST',
         body: {
           id: id,
@@ -41,8 +49,31 @@ const GoalsList = (props) => {
     );
   };
 
-  const failedGoalHandler = (id) => {
-    props.onFailedGoal(id);
+  const failedGoalHandler = (title, id) => {
+    const createFailedGoal = () => {
+      const newFailedGoal = {
+        id: id,
+        title: title,
+        date: new Date().toDateString(),
+      };
+      props.onFailedGoal(newFailedGoal);
+    };
+
+    sendFailedGoal(
+      {
+        url: failedUrl,
+        method: 'POST',
+        body: {
+          id: id,
+          title: title,
+          date: new Date().toDateString(),
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+      createFailedGoal
+    );
   };
 
   const filterHandler = (filterSelection) => {
@@ -68,8 +99,8 @@ const GoalsList = (props) => {
           id={goal.id}
           onClickGoal={clickedGoal}
           onFailedGoal={failedGoalHandler}
-          loading={isLoading}
-          error={error}
+          loading={completedLoading}
+          error={completedError}
         />
       ))}
     </ul>

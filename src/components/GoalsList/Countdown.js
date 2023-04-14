@@ -32,9 +32,10 @@ const Countdown = (props) => {
 
   useEffect(() => {
     if (remaining <= 0) {
-      props.onFailedGoal(props.id);
+      props.onFailedGoal(props.title, props.id);
     }
-  }, [remaining, props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remaining, props.id]);
 
   useEffect(() => {
     if (minutes === 0) {
