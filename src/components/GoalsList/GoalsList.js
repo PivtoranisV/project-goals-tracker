@@ -27,22 +27,32 @@ const GoalsList = (props) => {
     }
   });
 
+  let content = (
+    <ul className={styles['goal-list']}>
+      {filteredList.map((goal) => (
+        <Goal
+          title={goal.title}
+          time={goal.time}
+          category={goal.category}
+          key={goal.id}
+          id={goal.id}
+          onClickGoal={clickedGoal}
+          onFailedGoal={failedGoalHandler}
+        />
+      ))}
+    </ul>
+  );
+  if (props.loading) {
+    content = <h2>Loading Goals...</h2>;
+  }
+  if (props.error) {
+    content = <h2>{props.error}</h2>;
+  }
+
   return (
     <Card>
       <Filter onFilter={filterHandler} />
-      <ul className={styles['goal-list']}>
-        {filteredList.map((goal) => (
-          <Goal
-            title={goal.title}
-            time={goal.time}
-            category={goal.category}
-            key={goal.id}
-            id={goal.id}
-            onClickGoal={clickedGoal}
-            onFailedGoal={failedGoalHandler}
-          />
-        ))}
-      </ul>
+      {content}
     </Card>
   );
 };

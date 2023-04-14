@@ -117,7 +117,9 @@ const UserInputForm = (props) => {
                 />
               </div>
             </div>
-            <Button type="submit">Add Goal</Button>
+            <Button type="submit">
+              {props.loading ? 'Sending...' : 'Add Goal'}
+            </Button>
           </form>
         </Card>
       )}

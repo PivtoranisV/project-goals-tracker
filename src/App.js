@@ -7,12 +7,12 @@ import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
 import FailedGoalsList from './components/ArchivedGoals/FailedGoalsList';
 import Login from './components/Login/Login';
 import Header from './components/Header/Header';
-import LoginContext from './store/login-context';
-import styles from './App.module.css';
 import Space from './components/Space/Space';
 
-const URL =
-  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
+import LoginContext from './store/login-context';
+import useHttp from './hooks/use-http';
+
+import styles from './App.module.css';
 
 const App = () => {
   const [activeGoals, setActiveGoals] = useState([]);
@@ -21,25 +21,28 @@ const App = () => {
 
   const ctx = useContext(LoginContext);
 
-  const fetchGoals = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
+  const activeUrl =
+    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
 
+  const transformActiveGoals = (goal) => {
     const loadedGoals = [];
-    for (const key in data) {
+    for (const key in goal) {
       loadedGoals.push({
         id: key,
-        title: data[key].title,
-        category: data[key].category,
-        time: data[key].time,
+        title: goal[key].title,
+        category: goal[key].category,
+        time: goal[key].time,
       });
     }
+
     setActiveGoals(loadedGoals);
   };
 
+  const { isLoading, error, sendRequest: fetchActiveGoals } = useHttp();
+
   useEffect(() => {
-    fetchGoals();
-  }, []);
+    fetchActiveGoals({ url: activeUrl }, transformActiveGoals);
+  }, [fetchActiveGoals]);
 
   const addGoalHandler = (goal) => {
     setActiveGoals((prevGoals) => prevGoals.concat(goal));
@@ -78,6 +81,8 @@ const App = () => {
         <UserInput onAddGoal={addGoalHandler} />
         {activeGoals.length !== 0 ? (
           <GoalsList
+            error={error}
+            loading={isLoading}
             goals={activeGoals}
             onCompleteGoal={completeGoalHandler}
             onFailedGoal={failedGoalHandler}
