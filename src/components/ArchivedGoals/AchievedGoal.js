@@ -7,7 +7,9 @@ const AchievedGoal = (props) => {
       <span className={styles['achieved-goal-items__title']}>
         {props.title}
       </span>
-      <span className={styles['achieved-goal-items__date']}>{props.date}</span>
+      <span className={styles['achieved-goal-items__date']}>
+        Completed on <strong>{props.date}</strong>
+      </span>
     </li>
   );
 };

@@ -33,7 +33,11 @@ const FailedGoalsList = (props) => {
         <Card>
           <ul className={styles['failed-goal-list']}>
             {props.failedGoals.map((failedGoal) => (
-              <FailedGoal title={failedGoal.title} key={failedGoal.id} />
+              <FailedGoal
+                title={failedGoal.title}
+                date={failedGoal.date}
+                key={failedGoal.id}
+              />
             ))}
           </ul>
           <div className={styles.ok}>

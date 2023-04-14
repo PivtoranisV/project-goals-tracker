@@ -11,6 +11,7 @@ import Space from './components/Space/Space';
 
 import LoginContext from './store/login-context';
 import useHttp from './hooks/use-http';
+import { urls } from './urls/urls';
 
 import styles from './App.module.css';
 
@@ -21,12 +22,7 @@ const App = () => {
 
   const ctx = useContext(LoginContext);
 
-  const activeUrl =
-    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
-  const completedUrl =
-    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
-  const failedUrl =
-    'https://goals-tracker-25f88-default-rtdb.firebaseio.com/failedGoals.json';
+  const { activeUrl, completedUrl, failedUrl } = urls;
 
   const transformActiveGoals = (goal) => {
     const loadedGoals = [];
@@ -102,7 +98,14 @@ const App = () => {
     fetchActiveGoals({ url: activeUrl }, transformActiveGoals);
     fetchCompletedGoals({ url: completedUrl }, transformCompletedGoals);
     fetchFailedGoals({ url: failedUrl }, transformFailedGoals);
-  }, [fetchActiveGoals, fetchCompletedGoals, fetchFailedGoals]);
+  }, [
+    activeUrl,
+    completedUrl,
+    failedUrl,
+    fetchActiveGoals,
+    fetchCompletedGoals,
+    fetchFailedGoals,
+  ]);
 
   const addGoalHandler = (goal) => {
     setActiveGoals((prevGoals) => prevGoals.concat(goal));

@@ -5,11 +5,9 @@ import Goal from './Goal';
 import styles from './GoalList.module.css';
 
 import useHttp from '../../hooks/use-http';
+import { urls } from '../../urls/urls';
 
-const completedUrl =
-  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/completedGoals.json';
-const failedUrl =
-  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/failedGoals.json';
+const { completedUrl, failedUrl } = urls;
 
 const GoalsList = (props) => {
   const [filterSelection, setFilterSelection] = useState('');

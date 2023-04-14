@@ -2,9 +2,9 @@ import React from 'react';
 
 import UserInputForm from './UserInputForm';
 import useHttp from '../../hooks/use-http';
+import { urls } from '../../urls/urls';
 
-const URL =
-  'https://goals-tracker-25f88-default-rtdb.firebaseio.com/activeGoals.json';
+const { activeUrl } = urls;
 
 const UserInput = (props) => {
   const { isLoading, error, sendRequest: sendNewGoal } = useHttp();
@@ -28,7 +28,7 @@ const UserInput = (props) => {
 
     sendNewGoal(
       {
-        url: URL,
+        url: activeUrl,
         method: 'POST',
         body: {
           title: enteredTitle,
