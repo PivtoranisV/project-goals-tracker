@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import LoginContext from '../../store/login-context';
 import Button from '../UI/Button';
 import styles from './Navigation.module.css';
@@ -11,17 +12,17 @@ const Navigation = (props) => {
       <ul>
         {ctx.loginStatus && (
           <li>
-            <a href="/">Achieved Goals</a>
+            <Link to="/achieved">Achieved Goals</Link>
           </li>
         )}
         {ctx.loginStatus && (
           <li>
-            <a href="/">Failed Goals</a>
+            <Link to="/failed">Failed Goals</Link>
           </li>
         )}
         {ctx.loginStatus && (
           <li>
-            <a href="/">Take a Brake</a>
+            <Link to="/space">Take a Brake</Link>
           </li>
         )}
         {ctx.loginStatus && (

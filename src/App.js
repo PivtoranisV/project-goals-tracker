@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Card from './components/UI/Card';
@@ -127,44 +128,73 @@ const App = () => {
     deleteActiveGoal(goal.id);
   };
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Header />,
+      children: [
+        {
+          path: '/',
+          element: (
+            <>
+              <UserInput onAddGoal={addGoalHandler} />
+              {activeGoals.length !== 0 ? (
+                <GoalsList
+                  error={activeError}
+                  loading={activeLoading}
+                  goals={activeGoals}
+                  onCompleteGoal={completeGoalHandler}
+                  onFailedGoal={failedGoalHandler}
+                />
+              ) : (
+                <Card>
+                  <div className={styles.starter}>
+                    <h3>
+                      Every big achievement started with a small goal, but you
+                      do not have one, <strong>please add!</strong>
+                    </h3>
+                  </div>
+                </Card>
+              )}
+            </>
+          ),
+        },
+        {
+          path: 'achieved',
+          element: (
+            <AchievedGoalsList
+              achievedGoals={achievedGoals}
+              loading={completedLoading}
+              error={completedError}
+            />
+          ),
+        },
+        {
+          path: 'failed',
+          element: (
+            <FailedGoalsList
+              failedGoals={failedGoals}
+              loading={failedLoading}
+              error={failedError}
+            />
+          ),
+        },
+        {
+          path: 'space',
+          element: <Space />,
+        },
+      ],
+    },
+  ]);
+
   if (!ctx.loginStatus) {
     return <Login />;
   }
 
   return (
     <React.Fragment>
-      <Header />
       <main>
-        <UserInput onAddGoal={addGoalHandler} />
-        {activeGoals.length !== 0 ? (
-          <GoalsList
-            error={activeError}
-            loading={activeLoading}
-            goals={activeGoals}
-            onCompleteGoal={completeGoalHandler}
-            onFailedGoal={failedGoalHandler}
-          />
-        ) : (
-          <Card>
-            <div className={styles.starter}>
-              <h3>
-                Every big achievement started with a small goal, but you do not
-                have one, <strong>please add!</strong>
-              </h3>
-            </div>
-          </Card>
-        )}
-        <AchievedGoalsList
-          achievedGoals={achievedGoals}
-          loading={completedLoading}
-          error={completedError}
-        />
-        <FailedGoalsList
-          failedGoals={failedGoals}
-          loading={failedLoading}
-          error={failedError}
-        />
-        <Space />
+        <RouterProvider router={router} />
       </main>
     </React.Fragment>
   );
