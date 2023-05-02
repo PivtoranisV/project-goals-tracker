@@ -12,12 +12,6 @@
     margin-left: 1rem;
 }
 
-@media (max-width: 420px) {
-    .nav li {
-        margin-left: 0;
-    }
-}
-
 .nav a {
     text-decoration: none;
     color: var(--color-grey)
