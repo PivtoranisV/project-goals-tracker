@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Filter from '../Filter/Filter';
 import Card from '../UI/Card';
 import Goal from './Goal';
@@ -112,25 +111,10 @@ const GoalsList = (props) => {
   }
 
   return (
-    <>
-      <Card>
-        <Filter onFilter={filterHandler} />
-        {content}
-      </Card>
-      <Card>
-        <ul>
-          <li>
-            <Link to="/achieved">Achieved</Link>
-          </li>
-          <li>
-            <Link to="/failed">Failed</Link>
-          </li>
-          <li>
-            <Link to="/space">Space</Link>
-          </li>
-        </ul>
-      </Card>
-    </>
+    <Card>
+      <Filter onFilter={filterHandler} />
+      {content}
+    </Card>
   );
 };
 

@@ -28,18 +28,18 @@
     font: inherit;
     padding: 0.35rem 0.35rem;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-secondary-100);
 }
 
 .control input:focus {
     outline: none;
-    border-color: #e1e157;
-    background: rgb(255, 255, 191);
+    border-color: var(--color-secondary-100);
+    background: var(--color-secondary-200)
 }
 
 .control.invalid input {
-    border-color: red;
-    background: #fbdada;
+    border-color: var(--color-negative-primary);
+    background: var(--color-negative-secondary)
 }
 
 .actions {
@@ -58,8 +58,8 @@
 .btn:focus:disabled,
 .btn:hover:disabled,
 .btn:active:disabled {
-    background: #ccc;
-    border-color: #ccc;
-    color: #666666;
+    background: var(--color-grey);
+    border-color: var(--color-grey);
+    color: var(--color-primary);
     cursor: not-allowed;
 }

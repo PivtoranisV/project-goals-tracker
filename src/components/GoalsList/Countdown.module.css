@@ -1,17 +1,17 @@
 .goal-items__time {
     padding: 0.5rem 1rem;
     margin: 1rem;
-    background-color: #f7e702;
+    background-color: var(--color-secondary-100);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 12px var(--color-shadow);
 }
 
 .goal-items__time-low {
     padding: 0.5rem 1rem;
     margin: 1rem;
-    background-color: red;
+    background-color: var(--color-negative-primary);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 12px var(--color-shadow);
 }
 
 .wiggle {

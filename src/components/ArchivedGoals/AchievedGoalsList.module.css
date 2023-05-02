@@ -5,7 +5,7 @@
 }
 
 .starter h3 {
-    color: #015501;
+    color: var(--color-positive);
     text-align: justify;
     padding: 1rem;
 }

@@ -1,8 +1,9 @@
 .header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background: #230052;
+    background: var(--color-primary);
     padding: 0 0.5rem;
     margin-bottom: 3rem;
     position: fixed;
@@ -13,7 +14,7 @@
 }
 
 .header a {
-    color: white;
+    color: var(--color-secondary-100);
     text-decoration: none;
 }
 

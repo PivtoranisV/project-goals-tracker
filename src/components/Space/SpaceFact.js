@@ -43,37 +43,41 @@ const SpaceFact = () => {
   const day = new Date(spaceInfo.date).getDate();
 
   return (
-    <Card>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>{error.message}</p>}
-      {!isLoading && !error && (
-        <>
-          <div className={styles.title}>
-            <h1>{spaceInfo.title}</h1>
-            <h3>Space fact of the day from {`${month} ${day}, ${year}`}</h3>
-          </div>
-          <div>
-            <img src={spaceInfo.url} alt={spaceInfo.title} />
-          </div>
-          <div className={styles.explanation}>
-            <p>{spaceInfo.explanation}</p>
-          </div>
-          <div>
-            <form onSubmit={newImgHandler} className={styles.form}>
-              <div className={styles['form-input']}>
-                <label htmlFor="date">
-                  If you missed the space fact of the day, don't worry - just
-                  select any date that took place after June 16, 1995, and press
-                  the button!
-                </label>
-                <input type="date" id="date" ref={dateRef} />
-              </div>
-              <Button>Get New Fact</Button>
-            </form>
-          </div>
-        </>
-      )}
-    </Card>
+    <div>
+      <div className={styles.image}>
+        <img src={spaceInfo.url} alt={spaceInfo.title} />
+        <h3>{`${month} ${day}, ${year}`}</h3>
+      </div>
+      <Card>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>{error.message}</p>}
+        {!isLoading && !error && (
+          <>
+            <div className={styles.title}>
+              <h1>{spaceInfo.title}</h1>
+            </div>
+            <div className={styles.explanation}>
+              <p>{spaceInfo.explanation}</p>
+            </div>
+          </>
+        )}
+      </Card>
+      <Card>
+        <div>
+          <form onSubmit={newImgHandler} className={styles.form}>
+            <div className={styles['form-input']}>
+              <label htmlFor="date">
+                If you missed the space fact of the day, don't worry - just
+                select any date that took place after June 16, 1995, and press
+                the button!
+              </label>
+              <input type="date" id="date" ref={dateRef} />
+            </div>
+            <Button>Get New Fact</Button>
+          </form>
+        </div>
+      </Card>
+    </div>
   );
 };
 

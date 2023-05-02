@@ -6,25 +6,24 @@
     align-items: center;
 }
 
-@media (max-width: 420px) {
-    .nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-}
 
 .nav li {
     margin: 0;
     margin-left: 2rem;
 }
 
+@media (max-width: 420px) {
+    .nav li {
+        margin-left: 0;
+    }
+}
+
 .nav a {
     text-decoration: none;
-    color: rgb(191, 191, 191);
+    color: var(--color-grey)
 }
 
 .nav a:hover,
 .nav a:active {
-    color: rgb(255, 255, 191);
+    color: var(--color-secondary-200)
 }

@@ -3,19 +3,19 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 0.5rem 0.5rem;
-    background-color: #230052;
+    background-color: var(--color-primary);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.526);
+    box-shadow: 0 2px 12px var(--color-shadow);
     cursor: pointer;
 }
 
 .goal-items__title {
     padding: 0.8rem 0.8rem;
     font-weight: bold;
-    color: white;
+    color: var(--color-secondary-200);
 }
 
 .goal-items__category {
     margin-bottom: 1rem;
-    color: #d2d0c4
+    color: var(--color-grey)
 }

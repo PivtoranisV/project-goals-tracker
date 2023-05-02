@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, useContext } from 'react';
 import LoginContext from '../../store/login-context';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import styles from './Login.module.css';
@@ -67,7 +67,7 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <Header />
+      {/* <Header /> */}
       <Card>
         <form onSubmit={submitHandler}>
           <div

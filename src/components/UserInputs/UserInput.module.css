@@ -24,7 +24,7 @@
     font: inherit;
     padding: 0.5rem;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 2px solid var(--color-secondary-100);
     width: 18.5rem;
     max-width: 100%;
 }
@@ -44,7 +44,7 @@
 }
 
 .starter h3 {
-    color: #230052;
+    color: var(--color-primary);
     text-align: justify;
     border-radius: 6px;
     padding: 1rem;

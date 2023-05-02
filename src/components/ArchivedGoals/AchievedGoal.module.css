@@ -2,21 +2,21 @@
     display: flex;
     flex-direction: column;
     padding: 0.8rem 0.8rem;
-    background-color: #015501;
+    background-color: var(--color-positive);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 12px var(--color-shadow);
 }
 
 .achieved-goal-items__title {
     padding: 0.8rem 0.8rem;
     font-weight: bold;
-    color: white;
+    color: var(--color-secondary-200);
 }
 
 .achieved-goal-items__date {
     padding: 0.5rem 1rem;
     margin: 1rem;
-    background-color: #f7e702;
+    background-color: var(--color-secondary-100);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 12px var(--color-shadow);
 }
