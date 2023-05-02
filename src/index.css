@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 :root {
   font-family: 'Lato', sans-serif;
   font-size: 16px;

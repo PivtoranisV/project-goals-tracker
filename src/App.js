@@ -7,7 +7,6 @@ import UserInput from './components/UserInputs/UserInput';
 import AchievedGoalsList from './components/ArchivedGoals/AchievedGoalsList';
 import FailedGoalsList from './components/ArchivedGoals/FailedGoalsList';
 import Login from './components/Login/Login';
-import Header from './components/Header/Header';
 import Space from './components/Space/Space';
 
 import LoginContext from './store/login-context';
@@ -15,6 +14,7 @@ import useHttp from './hooks/use-http';
 import { urls } from './urls/urls';
 
 import styles from './App.module.css';
+import RootLayout from './pages/RootLayout';
 
 const App = () => {
   const [activeGoals, setActiveGoals] = useState([]);
@@ -131,7 +131,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Header />,
+      element: <RootLayout />,
       children: [
         {
           path: '/',
@@ -193,9 +193,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <main>
-        <RouterProvider router={router} />
-      </main>
+      <RouterProvider router={router} />
     </React.Fragment>
   );
 };
