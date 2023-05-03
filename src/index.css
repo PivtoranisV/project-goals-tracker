@@ -18,6 +18,9 @@
   font-weight: 400;
   color: #230052;
   background-color: #fcfaee;
+  background-image: url('./assets/goal-ladder-4.png');
+  background-size: 400px 125px;
+  background-attachment: fixed;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -42,10 +45,5 @@
 
 body {
   margin: 0;
-  /* font-family: 'Lato', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #a6a38a80;
-  color: #230052;
-  line-height: 1.8rem; */
+
 }
